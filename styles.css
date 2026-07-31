@@ -1,0 +1,126 @@
+:root {
+    --principal: #111854;
+    --claro: #ffffff;
+    --gris: #efefef;
+    --darkWhite: #444;
+    --today: #C7F464;
+    --bg: #4ECDC4;
+}
+
+body {
+    overflow: hidden;
+    font-family: 'Edu VIC WA NT Hand';
+    font-weight: 300;
+    color: black;
+}
+
+a:hover {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.bg-primary {
+    background-color: var(--principal) !important;
+}
+
+.text-light {
+    color: #ffffff;
+}
+
+#sidebar-container {
+    min-height: 100vh;
+}
+
+#sidebar-container .logo {
+    padding: .875rem 1.25rem;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.title {
+    text-align: center;
+    color: var(--darkWhite);
+}
+
+.content-row {
+    display: flex;
+    gap: 1.5em;
+    align-items: flex-start;
+}
+
+.task-panel {
+    flex: 1;
+}
+
+.calendar {
+    order: +100;
+    background: var(--bg);
+    width: 40%;
+    max-width: 350px;
+    margin: 0;
+    padding: .5em 0;
+}
+
+.calendar__info {
+    display: flex;
+    align-items: center;
+    padding: 0 2em;
+    font-size: 1.2em;
+    text-transform: uppercase;
+}
+
+.calendar__prev,
+.calendar__next {
+    color: var(--today);
+    cursor: pointer;
+    font-size: 1.3em;
+}
+
+.calendar__prev {
+    margin-right: auto;
+}
+
+.calendar__next {
+    margin-left: auto;
+}
+
+.calendar__week,
+.calendar__dates {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-gap: 10px;
+}
+
+.calendar__month,
+.calendar__year {
+    padding: .5em 1em;
+}
+
+.calendar__item {
+    text-align: center;
+    line-height: 2;
+}
+
+.calendar__today {
+    background: lightcoral;
+    color: white;
+    width: 50%;
+    border-radius: 50%;
+    margin: auto;
+}
+
+.calendar__last-days {
+    opacity: .3;
+}
+.main-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+.task-input-row,
+.botones {
+    display: flex;
+    justify-content: center;
+    gap: .5em;
+}
