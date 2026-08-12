@@ -1,4 +1,4 @@
-:root {
+/* :root {
     --principal: #111854;
     --claro: #ffffff;
     --gris: #efefef;
@@ -46,7 +46,7 @@ a:hover{
 }
 
 
-/* CONTENIDO PRINCIPAL */
+/* CONTENIDO PRINCIPAL 
 
 
 .main-content{
@@ -63,7 +63,7 @@ a:hover{
 }
 
 
-/* PANEL DE TAREAS Y CALENDARIO */
+/* PANEL DE TAREAS Y CALENDARIO 
 
 
 .content-row{
@@ -84,7 +84,7 @@ a:hover{
 }
 
 
-/* CALENDARIO */
+/* CALENDARIO 
 
 
 .calendar__info{
@@ -142,7 +142,7 @@ a:hover{
     opacity: .3;
 }
 
-/* TARJETAS */
+/* TARJETAS 
 
 
 .card{
@@ -172,4 +172,4 @@ a:hover{
 
 .card-footer .btn{
     flex: 1;
-}
+} */
