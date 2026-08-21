@@ -38,7 +38,8 @@ taskForm.addEventListener("submit", function(event) {
         descripcion,
         fechaEntrega,
         prioridad,
-        estado
+        estado,
+        completada: false
     };
 
     let tareas = JSON.parse(localStorage.getItem("tareas")) || [];
@@ -48,4 +49,16 @@ taskForm.addEventListener("submit", function(event) {
     taskForm.reset();
 
     Swal.fire({ title: "¡Tarea guardada!", text: "La tarea se guardó correctamente.", icon: "success", draggable: true });
+});
+const taskManager = new TaskManager(); 
+ 
+console.log(taskManager.tasks); 
+const boton = document.getElementById('btn-completar');
+boton.addEventListener('click', () => {
+    boton.classList.toggle('completado');
+    if (boton.classList.contains('completado')) {
+        boton.innerText = 'Descompletar ❌';
+    } else {
+        boton.innerText = 'Completado  ';
+    }
 });
