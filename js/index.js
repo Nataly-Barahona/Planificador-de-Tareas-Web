@@ -1,4 +1,3 @@
-
 const taskForm = document.querySelector("#taskForm");
 const nombreInput = document.querySelector("#nombre");
 const descripcionInput = document.querySelector("#descripcion");
@@ -7,8 +6,11 @@ const estadoSelect = document.querySelector("#estadoSelect");
 const mensajeError = document.querySelector("#mensajeError");
 const prioritySelect = document.querySelector("#prioritySelect");
 
-taskForm.addEventListener("submit", function(event) {
-    event.preventDefault();
+const taskManager = new TaskManager();
+
+const newTaskForm = document.querySelector('#newTaskForm'); 
+newTaskForm.addEventListener('submit', function(event) { 
+event.preventDefault();
 
     const nombre = nombreInput.value.trim();
     const descripcion = descripcionInput.value.trim();
@@ -26,39 +28,49 @@ taskForm.addEventListener("submit", function(event) {
 
     if (!formularioValido) {
         mensajeError.classList.remove("d-none");
-        Swal.fire({ title: "Error", text: "Por favor, completa todos los campos.", icon: "error" });
+
+        Swal.fire({
+            title: "Error",
+            text: "Por favor, completa todos los campos.",
+            icon: "error"
+        });
+
         return;
     }
 
     mensajeError.classList.add("d-none");
 
-    const tarea = {
-        id: Date.now(),
+    taskManager.addTask(
         nombre,
         descripcion,
         fechaEntrega,
-        prioridad,
-        estado,
-        completada: false
-    };
+        estado
+    );
 
-    let tareas = JSON.parse(localStorage.getItem("tareas")) || [];
-    tareas.push(tarea);
-    localStorage.setItem("tareas", JSON.stringify(tareas));
+    console.log(taskManager.tasks);
 
     taskForm.reset();
 
-    Swal.fire({ title: "¡Tarea guardada!", text: "La tarea se guardó correctamente.", icon: "success", draggable: true });
+    Swal.fire({
+        title: "¡Tarea guardada!",
+        text: "La tarea se guardó correctamente.",
+        icon: "success",
+        draggable: true
+    });
 });
-const taskManager = new TaskManager(); 
- 
-console.log(taskManager.tasks); 
-const boton = document.getElementById('btn-completar');
-boton.addEventListener('click', () => {
-    boton.classList.toggle('completado');
-    if (boton.classList.contains('completado')) {
-        boton.innerText = 'Descompletar ❌';
-    } else {
-        boton.innerText = 'Completado  ';
-    }
-});
+
+const boton = document.getElementById("btn-completar");
+
+if (boton) {
+    boton.addEventListener("click", () => {
+
+        boton.classList.toggle("completado");
+
+        if (boton.classList.contains("completado")) {
+            boton.innerText = "Descompletar ❌";
+        } else {
+            boton.innerText = "Completado";
+        }
+    });
+}
+
