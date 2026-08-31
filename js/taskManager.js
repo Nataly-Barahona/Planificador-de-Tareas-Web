@@ -6,21 +6,25 @@ class TaskManager {
 
     addTask(name, description, dueDate, status) {
         this.currentId++;
+        
+        const creationDate = new Date();
+        const createdAt = [
+            creationDate.getFullYear(),
+            String(creationDate.getMonth() + 1).padStart(2, "0"),
+            String(creationDate.getDate()).padStart(2, "0")
+        ].join("-");
 
-        this.tasks.push({
+        const task = {
             id: this.currentId,
             name: name,
             description: description,
             dueDate: dueDate,
-            status: 'PORHACER'
-        });
-        taskManager.addTask(
-            name,
-            description,
-            dueDate,
-            status
-        );
-        newTaskForm.reset();
-    }
+            status: "PORHACER",
+            createdAt: createdAt
+        };
 
+        this.tasks.push(task);
+
+        return task;
+    }
 }

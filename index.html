@@ -6,409 +6,310 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Planificador de Tareas Web</title>
 
-    <link rel="stylesheet" href="/css/styles.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+        crossorigin="anonymous">
     <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
-
-
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
-
-    <!-- Sidebar -->
-    <div class="app">
-        <div class="d-flex">
-
-            <!-- Menu hamburguesa -->
-            <div id="sidebar-container" class="bg-primary">
-                <div class="logo p-3">
-                    <h4 class="text-light mb-0">App de tareas</h4>
-                </div>
-
-                <div class="menu">
-
-                    <a href="#" class="d-block text-light p-3 me-2 lead text-decoration-none"><i
-                            class="icon ion-md-clipboard me-2"></i>Tareas</a>
-                    <a href="#" class="d-block text-light p-3 me-2 lead text-decoration-none"><i
-                            class="icon ion-md-apps me-2"></i>Tablero</a>
-                    <a href="#" class="d-block text-light p-3 me-2 lead text-decoration-none"><i
-                            class="icon ion-md-calendar me-2"></i>Calendario</a>
-                    <a href="#" class="d-block text-light p-3 me-2 lead text-decoration-none"><i
-                            class="icon ion-md-people me-2"></i>equipo</a>
-                    <a href="#" class="d-block text-light p-3 me-2 lead text-decoration-none"><i
-                            class="icon ion-md-trophy me-2"></i>Tareas
-                        Completadas</a>
-                    <a href="#" class="d-block text-light p-3 me-2 lead text-decoration-none"><i
-                            class="icon ion-md-settings me-2"></i>Configuraciones</a>
-                </div>
+    <div class="app-layout">
+        <aside class="sidebar">
+            <div class="sidebar__brand">
+                <i class="icon ion-md-checkbox-outline" aria-hidden="true"></i>
+                <span>App de tareas</span>
             </div>
 
-            <!-- Navbar -->
+            <nav class="sidebar__menu" aria-label="Navegación principal">
+                <a href="#newTaskForm" class="sidebar__link is-active" id="newTaskNavLink" aria-current="page">
+                    <i class="icon ion-md-add-circle-outline" aria-hidden="true"></i>
+                    Nueva tarea
+                </a>
+                <a href="#taskList" class="sidebar__link" id="taskListNavLink">
+                    <i class="icon ion-md-clipboard" aria-hidden="true"></i>
+                    Lista de tareas
+                </a>
+                <a href="#calendarView" class="sidebar__link" id="calendarNavLink">
+                    <i class="icon ion-md-calendar" aria-hidden="true"></i>
+                    Calendario
+                </a>
+            </nav>
+        </aside>
 
-            <div class="w-100">
+        <main class="main-content">
+            <div id="plannerView">
+                <header class="page-header">
+                    <p class="page-header__eyebrow">Planificador personal</p>
+                    <h1>Planificador de Tareas Web</h1>
+                    <p class="page-header__description">
+                        Registra tus actividades y cambia visualmente su estado cuando las completes.
+                    </p>
+                </header>
 
-                <nav class="navbar navbar-expand-lg bg-body-tertiary shadow-sm">
-                    <div class="container-fluid">
+                <section class="form-panel" aria-labelledby="formTitle">
+                <div class="section-heading">
+                    <div>
+                        <p class="section-heading__eyebrow">Nueva tarea</p>
+                        <h2 id="formTitle">Registrar una actividad</h2>
+                    </div>
+                </div>
 
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
-                            aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                            <ul class="navbar-nav ms-auto">
-                                <li class="nav-item">
-                                    <a class="nav-link active" href="#"><i class="icon ion-md-planet"></i> Inicio</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#"><i class="icon ion-md-pie"></i> Funciones</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#"><i class="icon ion-md-trending"></i> Prioridades</a>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                        aria-expanded="false"><i class="icon ion-md-add"></i> Más</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#"><i class="icon ion-md-contact"></i>
-                                                Perfil</a></li>
-                                        <li><a class="dropdown-item" href="#"><i class="icon ion-md-settings"></i>
-                                                Configuraciones</a></li>
-                                        <li><a class="dropdown-item" href="#"><i class="icon ion-md-exit"></i> Cerrar
-                                                sesión</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
+                <form id="newTaskForm" novalidate>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="newTaskNameInput" class="form-label">Nombre</label>
+                            <input type="text" id="newTaskNameInput" class="form-control"
+                                placeholder="Ej. Preparar presentación" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="newTaskDueDateInput" class="form-label">Fecha de entrega</label>
+                            <input type="date" id="newTaskDueDateInput" class="form-control" required>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="newTaskDescriptionInput" class="form-label">Descripción</label>
+                            <textarea id="newTaskDescriptionInput" class="form-control" rows="3"
+                                placeholder="Describe lo que necesitas realizar" required></textarea>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="newTaskStatusInput" class="form-label">Estado</label>
+                            <select id="newTaskStatusInput" class="form-select" required>
+                                <option value="" selected>Selecciona un estado</option>
+                                <option value="PORHACER">Por hacer</option>
+                                <option value="ENPROGRESO">En progreso</option>
+                                <option value="COMPLETADA">Completada</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6 d-flex align-items-end">
+                            <button class="btn btn-primary w-100" type="submit">
+                                <i class="icon ion-md-add" aria-hidden="true"></i>
+                                Agregar tarea
+                            </button>
                         </div>
                     </div>
-                </nav>
-                <!-- HEADER - Planificador de Tareas/ formulario -->
-                <main class="main-content">
-                    <h1 class="title">Planificador de Tareas Web</h1>
+                </form>
 
-                    <form class="taskForm" id="taskForm" novalidate>
-                        <!-- nombre  -->
-                        <div class="field mb-3">
-                            <label for="nombre" class="form-label"> Nombre de la tarea </label>
-                            <input type="text" id="nombre" class="form-control" placeholder="Nombre de la tarea"
-                                required>
-                        </div>
-                        <!-- descripción  -->
-                        <div class="field mb-3">
-                            <label for="descripcion" class="form-label"> Descripción de la tarea </label>
-                            <textarea id="descripcion" class="form-control" rows="3" placeholder="Pon aqui tu tarea..."
-                                required></textarea>
-                            <div class="invalid-feedback">
-                                Por favor, introduce una tarea.
-                            </div>
-                        </div>
+                <div id="mensajeError" class="alert alert-danger d-none mt-3 mb-0" role="alert" aria-live="polite">
+                    Completa nombre, descripción, fecha de entrega y estado.
+                </div>
 
-                        <!-- Fecha de entrega -->
-                        <div class="field mb-3">
-                            <label for="fechaEntrega" class="form-label"> Fecha de entrega </label>
-                            <input type="date" id="fechaEntrega" class="form-control" required>
-                        </div>
+                <div id="mensajeExito" class="alert alert-success d-none mt-3 mb-0" role="status" aria-live="polite">
+                    La tarea se registró correctamente.
+                </div>
+                </section>
 
-                        <!-- prioridad  -->
-                        <div class="row">
-                            <div class="col-md-6 mb-3 d-flex align-items-end">
-
-                                <select id="prioritySelect" class="form-control" required>
-                                    <option value="" disabled selected>Seleccionar prioridad</option>
-                                    <option value="alta">Alta</option>
-                                    <option value="media">Media</option>
-                                    <option value="baja">Baja</option>
-                                </select>
-                                <div class="invalid-feedback">Por favor, selecciona una prioridad.</div>
-                            </div>
-                            <!-- Estado -->
-                            <div class="col-md-6 mb-3 d-flex align-items-end">
-                                <select id="estadoSelect" class="form-control" required>
-                                    <option value="" disabled selected>Seleccionar estado</option>
-                                    <option value="pendiente">Pendiente</option>
-                                    <option value="en_progreso">En progreso</option>
-                                    <option value="completada">Completada</option>
-                                    <option value="cancelada">Cancelada</option>
-                                </select>
-                                <div class="invalid-feedback">Por favor, selecciona un estado.</div>
-                            </div>
-
-                            <div class="col-md-6 mb-3">
-                                <button class="btn btn-primary w-100" type="submit">Agregar Tarea</button>
-                            </div>
-
-                        </div>
-
-                    </form>
-                    <div id="mensajeError" class="alert alert-danger d-none" role="alert">
-                        Por favor, completa todos los campos.
+                <section id="taskList" class="task-list" aria-labelledby="taskListTitle">
+                <div class="section-heading">
+                    <div>
+                        <p class="section-heading__eyebrow">Lista de tareas</p>
+                        <h2 id="taskListTitle">Actividades registradas</h2>
                     </div>
-                    <!-- lista de tareas -->
-                    <div class="tasks-and-calendar">
+                    <span class="badge rounded-pill text-bg-primary" id="taskCountBadge">5 tareas</span>
+                </div>
 
-                        <section class="task-panel">
-                            <div class="task-panel__toolbar">
+                <div class="task-filters" role="group" aria-label="Filtrar tareas por estado">
+                    <button type="button" class="btn btn-primary task-filter is-active" data-filter="all"
+                        aria-pressed="true">Todas</button>
+                    <button type="button" class="btn btn-outline-primary task-filter" data-filter="completed"
+                        aria-pressed="false">Completas</button>
+                    <button type="button" class="btn btn-outline-primary task-filter" data-filter="pending"
+                        aria-pressed="false">Pendientes</button>
+                </div>
 
-                                <!-- <Busquedad-->
-                                <input type="search" id="buscarInput" aria-label="Buscar tarea"
-                                    placeholder="Buscar tu tarea..." class="Buscar-input">
-
-                                <!-- Botones -->
-                                <div class="filtros" id="filtros">
-                                    <button type="button" class="btn-filter" data-filter="todas">Todas</button>
-                                    <button type="button" class="btn-filter"
-                                        data-filter="pendientes">Pendientes</button>
-                                    <button type="button" class="btn-filter"
-                                        data-filter="completadas">Completadas</button>
-                                </div>
+                <div id="contenedorTareas" class="row g-4">
+                    <div class="col-md-6 col-xl-4 task-column">
+                        <article class="card task-card h-100 shadow-sm" data-due-date="2026-09-04">
+                            <div class="card-body d-flex flex-column">
+                                <h3 class="card-title h5">Preparar presentación final</h3>
+                                <p class="card-text flex-grow-1">
+                                    Diseñar las diapositivas y practicar la exposición del proyecto.
+                                </p>
+                                <dl class="task-details mb-3">
+                                    <div>
+                                        <dt>Fecha de entrega</dt>
+                                        <dd>4 de septiembre de 2026</dd>
+                                    </div>
+                                    <div>
+                                        <dt>Estado</dt>
+                                        <dd><span class="badge status-badge bg-warning text-dark">Pendiente</span></dd>
+                                    </div>
+                                </dl>
+                                <button type="button" class="btn btn-outline-success btn-completar"
+                                    aria-pressed="false">
+                                    <i class="icon ion-md-checkmark" aria-hidden="true"></i>
+                                    Marcar como completada
+                                </button>
                             </div>
-                            <div class="content-row">
-                                <div class="row g-4 mt-3" id="contenedorTareas">
-
-                                    <!-- Tarjeta 1 -->
-                                    <div class="col-md-6 col-lg-4">
-                                        <div class="card h-100 shadow-sm">
-                                            <div class="card-header text-black"> <i class="icon ion-md-warning"></i>
-                                                Prioridad:</div>
-
-                                            <div class="card-body">
-                                                <h5 class="card-title">Nombre de la tarea</h5>
-
-                                                <p class="card-text">
-                                                    <strong>Descripción:</strong><br>
-                                                    Esta es una tarea de ejemplo para mostrar cómo se verán las
-                                                    tareas en la
-                                                    aplicación.
-                                                </p>
-
-                                                <p><strong>Fecha:</strong> </p>
-
-                                                <p>
-                                                    <strong>Estado:</strong>
-                                                    <span class="badge bg-warning text-dark">Pendiente</span>
-                                                </p>
-                                            </div>
-
-                                            <div class="card-footer d-flex justify-content-between">
-                                                <button class="btn btn-warning btn-sm">
-                                                    <i class="icon ion-md-brush"></i>Editar
-                                                </button>
-
-                                                <button class="btn-completar">
-                                                    <i class="icon ion-md-checkmark"></i>Completar
-                                                </button>
-
-                                                <button class="btn btn-danger btn-sm">
-                                                    <i class="icon ion-md-trash"></i>Eliminar
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Tarjeta 2 -->
-                                    <div class="col-md-6 col-lg-4">
-                                        <div class="card h-100 shadow-sm">
-                                            <div class="card-header text-black"> <i class="icon ion-md-warning"></i>
-                                                Prioridad:</div>
-
-                                            <div class="card-body">
-                                                <h5 class="card-title">Nombre de la tarea</h5>
-
-                                                <p class="card-text">
-                                                    <strong>Descripción:</strong><br>
-                                                    Esta es una tarea de ejemplo para mostrar cómo se verán las
-                                                    tareas en la
-                                                    aplicación.
-                                                </p>
-
-                                                <p><strong>Fecha:</strong> </p>
-
-                                                <p>
-                                                    <strong>Estado:</strong>
-                                                    <span class="badge bg-warning text-dark">Pendiente</span>
-                                                </p>
-                                            </div>
-
-                                            <div class="card-footer d-flex justify-content-between">
-                                                <button class="btn btn-warning btn-sm">
-                                                    <i class="icon ion-md-brush"></i>Editar
-                                                </button>
-
-                                                <button class="btn-completar">
-                                                    <i class="icon ion-md-checkmark"></i>Completar
-                                                </button>
-
-                                                <button class="btn btn-danger btn-sm">
-                                                    <i class="icon ion-md-trash"></i>Eliminar
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Tarjeta 3 -->
-                                    <div class="col-md-6 col-lg-4">
-                                        <div class="card h-100 shadow-sm">
-                                            <div class="card-header text-black"> <i class="icon ion-md-warning"></i>
-                                                Prioridad:</div>
-
-                                            <div class="card-body">
-                                                <h5 class="card-title">Nombre de la tarea</h5>
-
-                                                <p class="card-text">
-                                                    <strong>Descripción:</strong><br>
-                                                    Esta es una tarea de ejemplo para mostrar cómo se verán las
-                                                    tareas en la
-                                                    aplicación.
-                                                </p>
-
-                                                <p><strong>Fecha:</strong> </p>
-
-                                                <p>
-                                                    <strong>Estado:</strong>
-                                                    <span class="badge bg-warning text-dark">Pendiente</span>
-                                                </p>
-                                            </div>
-
-                                            <div class="card-footer d-flex justify-content-between">
-                                                <button class="btn btn-warning btn-sm">
-                                                    <i class="icon ion-md-brush"></i>Editar
-                                                </button>
-
-                                                <button class="btn-completar">
-                                                    <i class="icon ion-md-checkmark"></i>Completar
-                                                </button>
-
-                                                <button class="btn btn-danger btn-sm">
-                                                    <i class="icon ion-md-trash"></i>Eliminar
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Tarjeta 4 -->
-                                    <div class="col-md-6 col-lg-4">
-                                        <div class="card h-100 shadow-sm">
-                                            <div class="card-header text-black"> <i class="icon ion-md-warning"></i>
-                                                Prioridad:</div>
-
-                                            <div class="card-body">
-                                                <h5 class="card-title">Nombre de la tarea</h5>
-
-                                                <p class="card-text">
-                                                    <strong>Descripción:</strong><br>
-                                                    Esta es una tarea de ejemplo para mostrar cómo se verán las
-                                                    tareas en la
-                                                    aplicación.
-                                                </p>
-
-                                                <p><strong>Fecha:</strong> </p>
-
-                                                <p>
-                                                    <strong>Estado:</strong>
-                                                    <span class="badge bg-warning text-dark">Pendiente</span>
-                                                </p>
-                                            </div>
-
-                                            <div class="card-footer d-flex justify-content-between">
-                                                <button class="btn btn-warning btn-sm">
-                                                    <i class="icon ion-md-brush"></i>Editar
-                                                </button>
-
-                                                <button class="btn-completar">
-                                                    <i class="icon ion-md-checkmark"></i>Completar
-                                                </button>
-
-                                                <button class="btn btn-danger btn-sm">
-                                                    <i class="icon ion-md-trash"></i>Eliminar
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Tarjeta 5 -->
-                                    <div class="col-md-6 col-lg-4">
-                                        <div class="card h-100 shadow-sm">
-                                            <div class="card-header text-black"> <i class="icon ion-md-warning"></i>
-                                                Prioridad:</div>
-
-                                            <div class="card-body">
-                                                <h5 class="card-title">Nombre de la tarea</h5>
-
-                                                <p class="card-text">
-                                                    <strong>Descripción:</strong><br>
-                                                    Esta es una tarea de ejemplo para mostrar cómo se verán las
-                                                    tareas en la
-                                                    aplicación.
-                                                </p>
-
-                                                <p><strong>Fecha:</strong> </p>
-
-                                                <p>
-                                                    <strong>Estado:</strong>
-                                                    <span class="badge bg-warning text-dark">Pendiente</span>
-                                                </p>
-                                            </div>
-
-                                            <div class="card-footer d-flex justify-content-between">
-                                                <button class="btn btn-warning btn-sm">
-                                                    <i class="icon ion-md-brush"></i>Editar
-                                                </button>
-
-                                                <button class="btn-completar">
-                                                    <i class="icon ion-md-checkmark"></i>Completar
-                                                </button>
-
-                                                <button class="btn btn-danger btn-sm">
-                                                    <i class="icon ion-md-trash"></i>Eliminar
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <!-- Botón eliminar -->
-                                <div class="mt-4">
-                                    <button class="btn-eliminartodo"><i class="icon ion-md-trash"></i> Eliminar
-                                        Todo</button>
-
-                                </div>
-                            </div>
-                        </section>
-
-                        <!-- Calendar -->
-                        <div class="calendar">
-                            <div class="calendar__info">
-                                <div class="calendar__prev" id="prev-month">&#9664;</div>
-                                <div class="calendar__month" id="month"></div>
-                                <div class="calendar__year" id="year"></div>
-                                <div class="calendar__next" id="next-month">&#9654;</div>
-                            </div>
-
-                            <div class="calendar__week">
-                                <div class="calendar__day calendar__item">Lunes</div>
-                                <div class="calendar__day calendar__item">Martes</div>
-                                <div class="calendar__day calendar__item">Miercoles</div>
-                                <div class="calendar__day calendar__item">Jueves</div>
-                                <div class="calendar__day calendar__item">Viernes</div>
-                                <div class="calendar__day calendar__item">Sabado</div>
-                                <div class="calendar__day calendar__item">Domingo</div>
-                            </div>
-
-                            <div class="calendar__dates" id="dates"></div>
-                        </div>
+                        </article>
                     </div>
 
-                </main>
-                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-                <script src="/js/taskManager.js"></script>
-                <script src="/js/index.js"></script>
+                    <div class="col-md-6 col-xl-4 task-column">
+                        <article class="card task-card h-100 shadow-sm" data-due-date="2026-09-08">
+                            <div class="card-body d-flex flex-column">
+                                <h3 class="card-title h5">Entregar informe de investigación</h3>
+                                <p class="card-text flex-grow-1">
+                                    Revisar las fuentes y redactar las conclusiones del documento.
+                                </p>
+                                <dl class="task-details mb-3">
+                                    <div>
+                                        <dt>Fecha de entrega</dt>
+                                        <dd>8 de septiembre de 2026</dd>
+                                    </div>
+                                    <div>
+                                        <dt>Estado</dt>
+                                        <dd><span class="badge status-badge bg-warning text-dark">Pendiente</span></dd>
+                                    </div>
+                                </dl>
+                                <button type="button" class="btn btn-outline-success btn-completar"
+                                    aria-pressed="false">
+                                    <i class="icon ion-md-checkmark" aria-hidden="true"></i>
+                                    Marcar como completada
+                                </button>
+                            </div>
+                        </article>
+                    </div>
 
+                    <div class="col-md-6 col-xl-4 task-column">
+                        <article class="card task-card h-100 shadow-sm" data-due-date="2026-09-12">
+                            <div class="card-body d-flex flex-column">
+                                <h3 class="card-title h5">Actualizar portafolio web</h3>
+                                <p class="card-text flex-grow-1">
+                                    Añadir los proyectos recientes y mejorar la sección de contacto.
+                                </p>
+                                <dl class="task-details mb-3">
+                                    <div>
+                                        <dt>Fecha de entrega</dt>
+                                        <dd>12 de septiembre de 2026</dd>
+                                    </div>
+                                    <div>
+                                        <dt>Estado</dt>
+                                        <dd><span class="badge status-badge bg-warning text-dark">Pendiente</span></dd>
+                                    </div>
+                                </dl>
+                                <button type="button" class="btn btn-outline-success btn-completar"
+                                    aria-pressed="false">
+                                    <i class="icon ion-md-checkmark" aria-hidden="true"></i>
+                                    Marcar como completada
+                                </button>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="col-md-6 col-xl-4 task-column">
+                        <article class="card task-card h-100 shadow-sm" data-due-date="2026-09-15">
+                            <div class="card-body d-flex flex-column">
+                                <h3 class="card-title h5">Estudiar fundamentos de JavaScript</h3>
+                                <p class="card-text flex-grow-1">
+                                    Repasar clases, objetos, arrays, formularios y eventos del navegador.
+                                </p>
+                                <dl class="task-details mb-3">
+                                    <div>
+                                        <dt>Fecha de entrega</dt>
+                                        <dd>15 de septiembre de 2026</dd>
+                                    </div>
+                                    <div>
+                                        <dt>Estado</dt>
+                                        <dd><span class="badge status-badge bg-warning text-dark">Pendiente</span></dd>
+                                    </div>
+                                </dl>
+                                <button type="button" class="btn btn-outline-success btn-completar"
+                                    aria-pressed="false">
+                                    <i class="icon ion-md-checkmark" aria-hidden="true"></i>
+                                    Marcar como completada
+                                </button>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="col-md-6 col-xl-4 task-column">
+                        <article class="card task-card h-100 shadow-sm" data-due-date="2026-09-18">
+                            <div class="card-body d-flex flex-column">
+                                <h3 class="card-title h5">Organizar reunión del equipo</h3>
+                                <p class="card-text flex-grow-1">
+                                    Preparar la agenda y confirmar la disponibilidad de los participantes.
+                                </p>
+                                <dl class="task-details mb-3">
+                                    <div>
+                                        <dt>Fecha de entrega</dt>
+                                        <dd>18 de septiembre de 2026</dd>
+                                    </div>
+                                    <div>
+                                        <dt>Estado</dt>
+                                        <dd><span class="badge status-badge bg-warning text-dark">Pendiente</span></dd>
+                                    </div>
+                                </dl>
+                                <button type="button" class="btn btn-outline-success btn-completar"
+                                    aria-pressed="false">
+                                    <i class="icon ion-md-checkmark" aria-hidden="true"></i>
+                                    Marcar como completada
+                                </button>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+                </section>
             </div>
-        </div>
+
+            <section id="calendarView" class="calendar-view d-none" aria-labelledby="calendarTitle">
+                <header class="page-header">
+                    <p class="page-header__eyebrow">Vista por fecha de entrega</p>
+                    <h1 id="calendarTitle">Calendario de tareas</h1>
+                    <p class="page-header__description">
+                        Selecciona un día para consultar las tareas programadas para esa fecha.
+                    </p>
+                </header>
+
+                <div class="calendar-layout">
+                    <div class="calendar-card">
+                        <div class="calendar-toolbar">
+                            <button type="button" class="btn btn-light calendar-navigation" id="previousMonthButton"
+                                aria-label="Mostrar mes anterior">
+                                <i class="icon ion-md-arrow-back" aria-hidden="true"></i>
+                            </button>
+
+                            <h2 id="currentMonthLabel" class="calendar-month-label" aria-live="polite"></h2>
+
+                            <div class="calendar-toolbar__actions">
+                                <button type="button" class="btn btn-outline-primary btn-sm" id="todayButton">Hoy</button>
+                                <button type="button" class="btn btn-light calendar-navigation" id="nextMonthButton"
+                                    aria-label="Mostrar mes siguiente">
+                                    <i class="icon ion-md-arrow-forward" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="calendar-weekdays" aria-hidden="true">
+                            <span>Lunes</span>
+                            <span>Martes</span>
+                            <span>Miércoles</span>
+                            <span>Jueves</span>
+                            <span>Viernes</span>
+                            <span>Sábado</span>
+                            <span>Domingo</span>
+                        </div>
+
+                        <div id="calendarGrid" class="calendar-grid" role="grid" aria-label="Días del mes"></div>
+                    </div>
+
+                    <aside class="calendar-tasks" aria-labelledby="selectedDateLabel">
+                        <p class="section-heading__eyebrow">Tareas del día</p>
+                        <h2 id="selectedDateLabel"></h2>
+                        <p class="calendar-tasks__hint">
+                            Se muestran las tareas según la fecha de entrega seleccionada en el formulario.
+                        </p>
+                        <div id="calendarTaskList" class="calendar-task-list" aria-live="polite"></div>
+                    </aside>
+                </div>
+            </section>
+        </main>
     </div>
 
+    <script src="js/taskManager.js"></script>
+    <script src="js/index.js"></script>
 </body>
 
 </html>
