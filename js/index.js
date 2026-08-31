@@ -20,6 +20,7 @@ const currentMonthLabel = document.querySelector("#currentMonthLabel");
 const calendarGrid = document.querySelector("#calendarGrid");
 const selectedDateLabel = document.querySelector("#selectedDateLabel");
 const calendarTaskList = document.querySelector("#calendarTaskList");
+const newTaskPriorityInput = document.querySelector("#newTaskPriorityInput");
 
 const taskManager = new TaskManager();
 const currentDate = new Date();
@@ -37,14 +38,34 @@ function validFormFieldInput(data) {
         return false;
     }
 
-    const nameIsValid = typeof data.name === "string" && data.name.trim() !== "";
-    const descriptionIsValid = typeof data.description === "string" && data.description.trim() !== "";
-    const dueDateIsValid = typeof data.dueDate === "string"
-        && data.dueDate !== ""
-        && !Number.isNaN(Date.parse(`${data.dueDate}T00:00:00`));
-    const statusIsValid = typeof data.status === "string" && data.status !== "";
+    const nameIsValid =
+        typeof data.name === "string" &&
+        data.name.trim() !== "";
 
-    return nameIsValid && descriptionIsValid && dueDateIsValid && statusIsValid;
+    const descriptionIsValid =
+        typeof data.description === "string" &&
+        data.description.trim() !== "";
+
+    const dueDateIsValid =
+        typeof data.dueDate === "string" &&
+        data.dueDate !== "" &&
+        !Number.isNaN(Date.parse(`${data.dueDate}T00:00:00`));
+
+    const statusIsValid =
+        typeof data.status === "string" &&
+        data.status !== "";
+
+    const priorityIsValid =
+        typeof data.priority === "string" &&
+        data.priority !== "";
+
+    return (
+        nameIsValid &&
+        descriptionIsValid &&
+        dueDateIsValid &&
+        statusIsValid &&
+        priorityIsValid
+    );
 }
 
 function getLocalDateKey(date) {
@@ -336,22 +357,24 @@ function updateTaskCardStatus(button) {
 newTaskForm.addEventListener("submit", function (event) {
     event.preventDefault();
 
+    // Activar las alertas individuales de Bootstrap
+    newTaskForm.classList.add("was-validated");
+
     const formData = {
         name: newTaskNameInput.value.trim(),
         description: newTaskDescriptionInput.value.trim(),
         dueDate: newTaskDueDateInput.value,
-        status: newTaskStatusInput.value
+        status: newTaskStatusInput.value,
+        priority: newTaskPriorityInput.value
     };
 
     console.log("Datos del formulario:", formData);
 
     if (!validFormFieldInput(formData)) {
-        mensajeError.classList.remove("d-none");
+        mensajeError.classList.add("d-none");
         mensajeExito.classList.add("d-none");
         return;
     }
-
-    mensajeError.classList.add("d-none");
 
     const newTask = taskManager.addTask(
         formData.name,
@@ -361,16 +384,28 @@ newTaskForm.addEventListener("submit", function (event) {
     );
 
     taskContainer.append(createTaskCard(newTask));
+
     updateTaskCount();
     applyTaskFilter();
 
     console.log(taskManager.tasks);
 
     newTaskForm.reset();
+
+    newTaskForm.classList.remove("was-validated");
+
     mensajeExito.classList.remove("d-none");
+
     const newTaskDueDate = getDateFromKey(newTask.dueDate);
-    visibleMonth = new Date(newTaskDueDate.getFullYear(), newTaskDueDate.getMonth(), 1);
+
+    visibleMonth = new Date(
+        newTaskDueDate.getFullYear(),
+        newTaskDueDate.getMonth(),
+        1
+    );
+
     selectedDateKey = newTask.dueDate;
+
     renderCalendar();
 });
 
