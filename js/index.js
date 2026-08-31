@@ -29,6 +29,15 @@ let selectedDateKey = getLocalDateKey(currentDate);
 let currentTaskFilter = "all";
 
 
+const menuToggle = document.querySelector("#menuToggle");
+const sidebar = document.querySelector(".sidebar");
+
+menuToggle.addEventListener("click", function () {
+    sidebar.classList.toggle("sidebar-open");
+});
+
+
+
 console.log(taskManager.tasks);
 
 registerExampleTasks();

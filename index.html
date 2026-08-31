@@ -15,25 +15,44 @@
 <body>
     <div class="app-layout">
         <aside class="sidebar">
+
             <div class="sidebar__brand">
+
+                <button id="menuToggle" class="menu-toggle" type="button" aria-label="Abrir menú">
+                    <i class="icon ion-md-menu"></i>
+                </button>
+
                 <i class="icon ion-md-checkbox-outline" aria-hidden="true"></i>
+
                 <span>App de tareas</span>
+
             </div>
 
             <nav class="sidebar__menu" aria-label="Navegación principal">
+
                 <a href="#newTaskForm" class="sidebar__link is-active" id="newTaskNavLink" aria-current="page">
+
                     <i class="icon ion-md-add-circle-outline" aria-hidden="true"></i>
                     Nueva tarea
+
                 </a>
+
                 <a href="#taskList" class="sidebar__link" id="taskListNavLink">
+
                     <i class="icon ion-md-clipboard" aria-hidden="true"></i>
                     Tareas
+
                 </a>
+
                 <a href="#calendarView" class="sidebar__link" id="calendarNavLink">
+
                     <i class="icon ion-md-calendar" aria-hidden="true"></i>
                     Calendario
+
                 </a>
+
             </nav>
+
         </aside>
 
         <main class="main-content">
@@ -316,7 +335,7 @@
 
             <section id="calendarView" class="calendar-view d-none" aria-labelledby="calendarTitle">
                 <header class="page-header">
-                    <p class="page-header__eyebrow">Vista por fecha de entrega</p>
+                    <p class="page-header__eyebrow"></p>
                     <h1 id="calendarTitle">Calendario de tareas</h1>
                     <p class="page-header__description">
                         Selecciona un día para consultar las tareas programadas para esa
