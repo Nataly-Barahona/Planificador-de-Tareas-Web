@@ -24,7 +24,7 @@ class TaskManager {
         };
 
         this.tasks.push(task);
-
+this.save();
         return task;
     }
     deleteTask(taskId) { 
@@ -35,6 +35,7 @@ class TaskManager {
             } 
         } 
         this.tasks = newTasks; 
+        this.save();
     } 
 
     save() {

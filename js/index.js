@@ -23,6 +23,7 @@ const calendarTaskList = document.querySelector("#calendarTaskList");
 const newTaskPriorityInput = document.querySelector("#newTaskPriorityInput");
 
 const taskManager = new TaskManager();
+taskManager.load();
 const currentDate = new Date();
 let visibleMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
 let selectedDateKey = getLocalDateKey(currentDate);
