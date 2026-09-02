@@ -277,7 +277,6 @@ function registerExampleTasks() {
     updateTaskCount();
     console.log(taskManager.tasks);
 }
-
 function createTaskCard(task) {
     const taskColumn = document.createElement("div");
     taskColumn.className = "col-md-6 col-xl-4 task-column";
@@ -296,9 +295,13 @@ function createTaskCard(task) {
                         <dd><span class="badge status-badge bg-warning text-dark">Pendiente</span></dd>
                     </div>
                 </dl>
-                <button type="button" class="btn btn-outline-success btn-completar" aria-pressed="false">
+                <button type="button" class="btn btn-outline-success btn-completar mb-2" aria-pressed="false">
                     <i class="icon ion-md-checkmark" aria-hidden="true"></i>
                     Marcar como completada
+                </button>
+                <button type="button" class="delete-button btn btn-danger btn-sm">
+                    <i class="icon ion-md-trash" aria-hidden="true"></i>
+                    Eliminar
                 </button>
             </div>
         </article>
@@ -423,6 +426,19 @@ taskContainer.addEventListener("click", function (event) {
 
     if (completeButton) {
         updateTaskCardStatus(completeButton);
+        return;
+    }
+    if (event.target.classList.contains("delete-button")) {
+        const parentTask = event.target.closest(".task-card");
+        const taskId = Number(parentTask.dataset.taskId);
+
+        taskManager.deleteTask(taskId);
+        taskManager.save(); 
+        taskManager.render(); 
+        
+        parentTask.closest(".task-column").remove();
+        updateTaskCount();
+        renderCalendar();
     }
 });
 

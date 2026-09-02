@@ -27,4 +27,30 @@ class TaskManager {
 
         return task;
     }
+    deleteTask(taskId) { 
+        const newTasks = []; 
+        for (let task of this.tasks) { 
+            if (task.id !== taskId) { 
+                newTasks.push(task); 
+            } 
+        } 
+        this.tasks = newTasks; 
+    } 
+
+    save() {
+        localStorage.setItem("tasks", JSON.stringify(this.tasks));
+        localStorage.setItem("currentId", String(this.currentId));
+    }
+
+    load() {
+        const tasksJson = localStorage.getItem("tasks");
+        if (tasksJson) {
+            this.tasks = JSON.parse(tasksJson);
+        }
+
+        const currentIdJson = localStorage.getItem("currentId");
+        if (currentIdJson) {
+            this.currentId = Number(currentIdJson);
+        }
+    }
 }
