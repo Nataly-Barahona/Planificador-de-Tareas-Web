@@ -300,6 +300,10 @@ function createTaskCard(task) {
                     <i class="icon ion-md-checkmark" aria-hidden="true"></i>
                     Marcar como completada
                 </button>
+                <button type="button" class="done-button btn btn-success mb-2" aria-pressed="false">
+                    <i class="icon ion-md-checkmark" aria-hidden="true"></i>
+                    Mark As Done
+                </button>
                 <button type="button" class="delete-button btn btn-danger btn-sm">
                     <i class="icon ion-md-trash" aria-hidden="true"></i>
                     Eliminar
@@ -393,7 +397,8 @@ newTaskForm.addEventListener("submit", function (event) {
         formData.name,
         formData.description,
         formData.dueDate,
-        formData.status
+        formData.status,
+        formData.priority
     );
 
     taskContainer.append(createTaskCard(newTask));
@@ -407,6 +412,7 @@ newTaskForm.addEventListener("submit", function (event) {
 
     newTaskForm.classList.remove("was-validated");
 
+    mensajeError.classList.add("d-none");
     mensajeExito.classList.remove("d-none");
 
     const newTaskDueDate = getDateFromKey(newTask.dueDate);
@@ -432,11 +438,11 @@ taskContainer.addEventListener("click", function (event) {
     if (event.target.classList.contains("delete-button")) {
         const parentTask = event.target.closest(".task-card");
         const taskId = Number(parentTask.dataset.taskId);
-
+        const task = taskManager.getTaskById(taskId);
+        task.status = 'DONE';
+        taskManager.render();
         taskManager.deleteTask(taskId);
-        taskManager.save(); 
-        taskManager.render(); 
-        
+
         parentTask.closest(".task-column").remove();
         updateTaskCount();
         renderCalendar();
